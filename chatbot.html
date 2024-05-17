@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <style>
+    /* Estilos para el contenedor del chatbot */
+    #botui-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    /* Estilos adicionales para personalizar la apariencia del chatbot */
+    /* ... */
+  </style>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bot-ui-react/dist/botui.min.js"></script>
+  <script>
+    const botui = new BotUI('botui-container');
+
+    botui.message.bot({
+      content: 'Hola, soy un chatbot. ¿En qué puedo ayudarte?'
+    }).then(() => {
+      return botui.action.button({
+        addMessage: true,
+        action: [
+          {
+            text: 'Opción 1',
+            value: 'opcion1'
+          },
+          {
+            text: 'Opción 2',
+            value: 'opcion2'
+          }
+        ]
+      });
+    });
+
+    botui.action.buttonAction = (data) => {
+      if (data.value === 'opcion1') {
+        botui.message.bot({
+          content: 'Has seleccionado la Opción 1.'
+        });
+      } else if (data.value === 'opcion2') {
+        botui.message.bot({
+          content: 'Has seleccionado la Opción 2.'
+        });
+      }
+    };
+  </script>
+</body>
+</html>
